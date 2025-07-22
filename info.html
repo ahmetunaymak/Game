@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Info Page</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="info-wrapper">
+    <h1>Info</h1>
+
+    <div class="image-placeholder">Image 1</div>
+    <div class="image-placeholder">Image 2</div>
+
+    <div class="accordion">
+      <button class="accordion-toggle">Why make a website?</button>
+      <div class="accordion-content">
+        <p>Because I am the best coder and this definitely is more valuable than a random ahh thing you won't ever use!</p>
+      </div>
+
+      <button class="accordion-toggle">Can I Flex This On Everyone?</button>
+      <div class="accordion-content">
+        <p>ABSOLUTELY!!! Who else gets a game and a website dedicated to their friendship? </p>
+      </div>
+
+      <button class="accordion-toggle">Credits</button>
+      <div class="accordion-content">
+        <p>
+            Project Lead: Tuna Aymak<br>
+            Lead Developer: Tuna Aymak<br>
+            Software Architect: Tuna Aymak<br>
+            Frontend Developer: Tuna Aymak<br>
+            Backend Developer: Tuna Aymak<br>
+            Database Administrator: Tuna Aymak<br>
+            UI/UX Designer: Tuna Aymak<br>
+            Quality Assurance Lead: Tuna Aymak<br>
+            Test Automation Engineer: Tuna Aymak<br>
+            DevOps Engineer: Tuna Aymak<br>
+            Security Specialist: Tuna Aymak<br>
+            Technical Writer: Tuna Aymak<br>
+            Product Manager: Tuna Aymak<br>
+            Scrum Master: Tuna Aymak<br>
+            Business Analyst: Tuna Aymak<br>
+            Release Manager: Tuna Aymak<br>
+            Support Engineer: Tuna Aymak<br>
+            Build Engineer: Tuna Aymak<br>
+            System Administrator: Tuna Aymak<br>
+            Code Reviewer: Tuna Aymak<br>
+            Performance Engineer: Tuna Aymak<br>
+            UX Researcher: Tuna Aymak<br>
+            Documentation Specialist: Tuna Aymak<br>
+            Integration Engineer: Tuna Aymak<br>
+            Data Scientist: Tuna Aymak<br>
+            Machine Learning Engineer: Tuna Aymak<br>
+            Customer Success Manager: Tuna Aymak<br>
+            Community Manager: Tuna Aymak<br>
+
+        </p>
+      </div>
+    </div>
+
+    <button class="final-button"><a href="index.html">Back</a></button>
+  </div>
+
+  <script>
+    const toggles = document.querySelectorAll(".accordion-toggle");
+    toggles.forEach((toggle) => {
+      toggle.addEventListener("click", function () {
+        this.classList.toggle("active");
+        const content = this.nextElementSibling;
+        content.style.maxHeight = content.style.maxHeight ? null : content.scrollHeight + "px";
+      });
+    });
+  </script>
+</body>
+</html>
