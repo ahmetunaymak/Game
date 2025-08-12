@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Beer Memory Match 🍺</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="body2">
+
+  <a href="index.html" class="back-btn2">← Back</a>
+
+  <h1 class="title2">Beer Memory Match 🍺</h1>
+  <p class="subtitle2">Match all the beers before you get too tipsy!</p>
+
+  <div id="game-board2"></div>
+
+  <button id="restart-btn2">Restart</button>
+
+  <script>
+
+(() => {
+  const COLS = 5;
+  const ROWS = 4;
+  const TOTAL = COLS * ROWS; 
+  const PAIRS = TOTAL / 2;  
+
+  
+  const beerImages = [
+    'photos/beer1.png',
+    'photos/beer2.png',
+    'photos/beer3.png',
+    'photos/beer4.png',
+    'photos/beer5.png',
+    'photos/beer6.png',
+    'photos/beer7.png',
+    'photos/beer8.png',
+    'photos/beer9.png',
+    'photos/beer10.png'
+  ].slice(0, PAIRS);
+
+  const backImagePath = 'photos/backcard.png';
+
+  const board = document.getElementById('game-board2');
+  const restartBtn = document.getElementById('restart-btn2');
+
+  let deck = [];
+  let flipped = []; 
+  let lockBoard = false;
+  let matches = 0;
+  let moves = 0;
+
+
+  function shuffle(a) {
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  
+  function preloadImages(urls = []) {
+    return Promise.all(urls.map(u => new Promise(resolve => {
+      const img = new Image();
+      img.src = u;
+      img.onload = img.onerror = () => resolve();
+    })));
+  }
+
+  
+  function buildDeck() {
+    const items = [];
+    beerImages.forEach((src, i) => {
+      items.push({ id: i, src });
+      items.push({ id: i, src }); 
+    });
+    deck = shuffle(items);
+  }
+
+ 
+ function createCard(item, index) {
+  const wrapper = document.createElement('button');
+  wrapper.className = 'card2';
+  wrapper.type = 'button';
+  wrapper.dataset.pairId = item.id;  
+  wrapper.dataset.src = item.src;     
+  wrapper.dataset.index = index;
+  wrapper.setAttribute('aria-label', `card ${index + 1}`);
+
+  const inner = document.createElement('div');
+  inner.className = 'card-inner2';
+
+  const front = document.createElement('div');
+  front.className = 'card-front2';
+  const fimg = document.createElement('img');
+  fimg.src = item.src;                
+  fimg.alt = 'beer';
+  front.appendChild(fimg);
+
+  const back = document.createElement('div');
+  back.className = 'card-back2';
+  const bimg = document.createElement('img');
+  bimg.src = backImagePath;        
+  bimg.alt = 'back';
+  back.appendChild(bimg);
+
+  inner.appendChild(front);
+  inner.appendChild(back);
+  wrapper.appendChild(inner);
+
+  wrapper.addEventListener('click', () => onCardClick(wrapper));
+  return wrapper;
+}
+
+  
+  function renderBoard() {
+    board.innerHTML = '';
+    board.style.gridTemplateColumns = `repeat(${COLS}, 1fr)`;
+
+    deck.forEach((item, idx) => {
+      const card = createCard(item, idx);
+      board.appendChild(card);
+    });
+
+    
+    flipped = [];
+    lockBoard = false;
+    matches = 0;
+    moves = 0;
+  }
+
+  function onCardClick(cardEl) {
+  if (lockBoard) return;
+  if (cardEl.classList.contains('flipped2') || cardEl.classList.contains('matched2')) return;
+
+  
+  cardEl.classList.add('flipped2');
+  flipped.push(cardEl);
+
+  if (flipped.length === 2) {
+    moves++;
+    lockBoard = true;
+    checkMatch();
+  }
+}
+
+ function checkMatch() {
+  const [a, b] = flipped;
+  const idA = a.dataset.pairId;
+  const idB = b.dataset.pairId;
+
+  if (idA === idB) {
+    
+    matches++;
+
+   
+    a.classList.add('matched2');
+    b.classList.add('matched2');
+
+   
+    a.setAttribute('aria-hidden', 'false');
+    b.setAttribute('aria-hidden', 'false');
+    a.disabled = true;
+    b.disabled = true;
+
+    
+    flipped = [];
+
+   
+    const matchAnimationDuration = 380;
+    setTimeout(() => {
+     
+      a.setAttribute('aria-hidden', 'true');
+      b.setAttribute('aria-hidden', 'true');
+      a.tabIndex = -1;
+      b.tabIndex = -1;
+
+      
+      lockBoard = false;
+
+      if (matches === PAIRS) {
+        
+        setTimeout(onWin, 450);
+      }
+    }, matchAnimationDuration);
+
+  } else {
+    
+    setTimeout(() => {
+      a.classList.remove('flipped2');
+      b.classList.remove('flipped2');
+      flipped = [];
+      lockBoard = false;
+    }, 800);
+  }
+}
+
+
+  function onWin() {
+    alert(`You matched all beers in ${moves} moves!`);
+    const again = confirm('Play again?');
+    if (again) startGame();
+    else lockBoard = true;
+  }
+
+  function startGame() {
+    buildDeck();
+    renderBoard();
+  }
+
+  
+  restartBtn.addEventListener('click', startGame);
+
+  
+  const allImgs = [backImagePath, ...beerImages];
+  preloadImages(allImgs).then(startGame);
+})();
+
+</script>
+</body>
+</html>
