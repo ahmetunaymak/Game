@@ -507,7 +507,7 @@ h1 {
   font-size: 1rem;
   border-radius: 8px;
   cursor: pointer;
-  margin: 12px auto 28px;
+  margin: 0px auto 70px;
   color: #16213e;
   font-weight: 700;
   box-shadow: 0 6px 20px rgba(0,0,0,0.35);
@@ -531,3 +531,4 @@ h1 {
 .card2.matched2[aria-hidden="true"] {
   visibility: hidden;        
 }
+
