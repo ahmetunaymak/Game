@@ -1,4 +1,4 @@
-const PHOTO_COUNT = 75;
+const PHOTO_COUNT = 32;
 const images = Array.from({ length: PHOTO_COUNT }, (_, i) => `photos/photo${i + 1}.jpg`);
 
 let currentIndex = 0;
@@ -19,24 +19,35 @@ function updatePhotos() {
 
   carousel1.style.transform = `translateX(-100%)`;
 }
+let isTransitioning = false;
 
 function scrollNext() {
+  if (isTransitioning) return;
+  isTransitioning = true;
+
   carousel1.style.transition = 'transform 0.4s ease';
   carousel1.style.transform = 'translateX(-200%)';
+
   carousel1.addEventListener('transitionend', () => {
     currentIndex = (currentIndex + 1) % images.length;
     carousel1.style.transition = 'none';
     updatePhotos();
+    isTransitioning = false;
   }, { once: true });
 }
 
 function scrollPrev() {
+  if (isTransitioning) return;
+  isTransitioning = true;
+
   carousel1.style.transition = 'transform 0.4s ease';
   carousel1.style.transform = 'translateX(0%)';
+
   carousel1.addEventListener('transitionend', () => {
     currentIndex = (currentIndex - 1 + images.length) % images.length;
     carousel1.style.transition = 'none';
     updatePhotos();
+    isTransitioning = false;
   }, { once: true });
 }
 
@@ -64,3 +75,5 @@ document.getElementById('share-btn1').addEventListener('click', async () => {
 });
 
 updatePhotos();
+
+
