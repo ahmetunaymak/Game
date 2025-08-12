@@ -135,23 +135,25 @@ header h1 {
 
 h1 {
   text-align: center;
-  color: #ff4b4b; /* Dark Red accent */
+  color: #ff4b4b; 
 }
 
-/* Image Placeholders */
+
 .image-placeholder {
-  width: 100%;
-  height: 180px;
+  width: 90%;
+  margin: auto;
   background-color: #1f2a50;
   border: 2px dashed #ff4b4b;
   color: #ccc;
+  font-size: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 20px;
+  padding: 5%;
 }
 
-/* Accordion */
+
 .accordion-toggle {
   background-color: #1a1a2e;
   color: #f0f0f0;
@@ -179,9 +181,9 @@ h1 {
   color: #d8d8d8;
 }
 
-/* Button */
+
 .final-button {
-  background-color: #8b0000; /* Dark red */
+  background-color: #8b0000; 
   color: white;
   padding: 14px 20px;
   width: 100%;
@@ -197,7 +199,7 @@ h1 {
   background-color: #a20000;
 }
 
-/*dsaujhdhsaguidyhsauiduiosahdsauidhu9isahbiudsa*/
+
 .container1 {
   max-width: 600px;
   margin: auto;
@@ -240,7 +242,7 @@ h1 {
   flex: 0 0 100%;
   height: 100%;
   width: 100%;
-  object-fit: cover; /* This is key */
+  object-fit: cover;
   object-position: center;
   border-radius: 1rem;
   cursor: pointer;
@@ -331,4 +333,201 @@ h1 {
 
 .back-button1:hover {
   background: rgba(255, 255, 255, 0.5);
+}
+.body2 {
+  background: linear-gradient(to bottom, #1a1a2e, #16213e);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 100vh;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+  padding: 0 8px;
+}
+
+.back-btn2 {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: rgba(255, 255, 255, 0.12);
+  color: white;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: background-color 0.18s ease;
+  z-index: 40;
+}
+
+.back-btn2:hover { background-color: rgba(255,255,255,0.22); }
+
+.title2 {
+  margin-top: 55px;
+  color: #f8d36f;
+  font-size: 1.35rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.subtitle2 {
+  margin-top: 6px;
+  color: #d6b86a;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+
+#game-board2 {
+  flex: 1; 
+  display: grid;
+  grid-template-columns: repeat(5, minmax(64px, 1fr)); 
+  gap: 12px;
+  padding: 16px;
+  justify-items: center;
+  align-content: center;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 720px;
+}
+
+
+@media (max-width: 480px) {
+  #game-board2 {
+    gap: 10px;
+    padding: 12px;
+    grid-template-columns: repeat(5, minmax(48px, 1fr));
+  }
+}
+
+
+.card2 {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  border: none;
+  padding: 0;
+  width: 100%;
+  aspect-ratio: 1 / 1;         
+  perspective: 1000px;         
+  border-radius: 12px;
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  overflow: visible;
+  -webkit-tap-highlight-color: transparent;
+}
+
+
+.card-inner2 {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.52s cubic-bezier(.2,.9,.3,1);
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35) inset;
+}
+
+
+.card2.flipped2 .card-inner2 {
+  transform: rotateY(180deg);
+}
+
+
+.card-front2,
+.card-back2 {
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.card-front2 {
+  transform: rotateY(180deg);
+  background-color: #fff3d4; 
+   object-fit: cover; 
+  border-radius: 8px; 
+}
+
+
+.card-back2 {
+  transform: rotateY(0deg);
+  background-color: transparent;
+  background-size: cover;
+  background-position: center;
+}
+
+
+.card-front2 img,
+.card-back2 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none; 
+}
+
+
+.card-front2 .number2 {
+  font-size: 2.6rem;
+  font-weight: 800;
+  color: #16213e;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.7);
+}
+
+
+.card2.matched2 .card-inner2 {
+  transform: none; 
+  transition: transform 160ms ease;
+}
+.card2.matched2 {
+  transform: translateY(-4px);
+  opacity: 0.95;
+}
+
+
+.card2:active .card-inner2 { transform: scale(0.995); }
+
+
+#restart-btn2 {
+  background-color: #d6a84f;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 12px auto 28px;
+  color: #16213e;
+  font-weight: 700;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+  transition: background-color 0.18s ease, transform 0.12s ease;
+}
+
+#restart-btn2:hover { background-color: #b98c3e; }
+#restart-btn2:active { transform: translateY(1px); }
+
+.card2.matched2 .card-inner2 {
+  transform: rotateY(180deg) scale(0.98); 
+}
+
+.card2.matched2 {
+  transition: opacity 360ms ease, transform 360ms ease;
+  opacity: 0;                
+  transform: scale(0.88);    
+  pointer-events: none;       
+}
+
+.card2.matched2[aria-hidden="true"] {
+  visibility: hidden;        
 }
