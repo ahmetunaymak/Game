@@ -342,7 +342,7 @@ h1 {
   justify-content: flex-start;
   align-items: center;
   min-height: 100vh;
-  overflow: hidden;
+  
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   box-sizing: border-box;
@@ -531,4 +531,5 @@ h1 {
 .card2.matched2[aria-hidden="true"] {
   visibility: hidden;        
 }
+
 
